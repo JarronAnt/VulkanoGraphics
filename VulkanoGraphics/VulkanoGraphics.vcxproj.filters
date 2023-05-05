@@ -24,6 +24,9 @@
     <ClCompile Include="app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="vulkano_pipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp">
@@ -32,5 +35,25 @@
     <ClInclude Include="vulkano_window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vulkano_pipeline.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="simple_shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="simple_shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="compile.bat">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="simple_shader.frag.spv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="simple_shader.vert.spv">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

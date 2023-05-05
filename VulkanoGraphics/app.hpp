@@ -1,5 +1,6 @@
 #pragma once
 #include "vulkano_window.hpp"
+#include "vulkano_pipeline.hpp"
 
 namespace Vulkano {
 
@@ -12,6 +13,7 @@ namespace Vulkano {
 		void run();
 	private:
 			VulkanoWindow appWindow{ WIDTH, HEIGHT, "Vulkano" };
+			VulkanoPipeline vulkanoPipeline{ "simple_shader.vert.spv", "simple_shader.frag.spv" };
 	};
 
 }
