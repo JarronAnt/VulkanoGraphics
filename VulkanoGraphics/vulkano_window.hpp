@@ -20,5 +20,8 @@ namespace Vulkano {
 		VulkanoWindow(int w, int h, std::string name);
 		bool shouldClose() { return glfwWindowShouldClose(window); };
 		~VulkanoWindow();
+
+		VulkanoWindow(const VulkanoWindow &) = delete;
+		VulkanoWindow &operator=(const VulkanoWindow&) = delete;
 	};
 }
