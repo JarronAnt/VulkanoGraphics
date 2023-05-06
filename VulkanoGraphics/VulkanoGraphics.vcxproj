@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="vulkano_device.cpp" />
     <ClCompile Include="vulkano_pipeline.cpp" />
     <ClCompile Include="vulkano_window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.hpp" />
+    <ClInclude Include="vulkano_device.hpp" />
     <ClInclude Include="vulkano_pipeline.hpp" />
     <ClInclude Include="vulkano_window.hpp" />
   </ItemGroup>

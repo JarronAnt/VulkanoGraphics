@@ -4,6 +4,8 @@
 #include "GLFW/glfw3.h"
 #include <string>
 
+
+
 namespace Vulkano {
 	
 	
@@ -23,5 +25,7 @@ namespace Vulkano {
 
 		VulkanoWindow(const VulkanoWindow &) = delete;
 		VulkanoWindow &operator=(const VulkanoWindow&) = delete;
+
+		void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
 	};
 }

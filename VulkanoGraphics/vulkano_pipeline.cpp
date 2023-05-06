@@ -4,6 +4,17 @@
 
 namespace Vulkano {
 
+	VulkanoPipeline::VulkanoPipeline(VulkanoDevice& device, const std::string& vertPath, const std::string& fragPath, const PipelineConfigInfo& info) :vulkanoDevice{device}
+	{
+		createGraphicsPipeline(vertPath, fragPath, info);
+	}
+
+	PipelineConfigInfo VulkanoPipeline::generateDefaultConfig(uint32_t width, uint32_t height)
+	{
+		PipelineConfigInfo info{};
+		return info;
+	}
+
 	std::vector<char> VulkanoPipeline::readFile(const std::string& filePath) {
 		std::ifstream file(filePath, std::ios::ate | std::ios::binary);
 
@@ -22,7 +33,7 @@ namespace Vulkano {
 		return buffer;
 	}
 
-	void VulkanoPipeline::createGraphicsPipeline(const std::string& vertPath, const std::string& fragPath)
+	void VulkanoPipeline::createGraphicsPipeline(const std::string& vertPath, const std::string& fragPath, const PipelineConfigInfo& info)
 	{
 		auto vertCode = readFile(vertPath);
 		auto fragCode = readFile(fragPath);
@@ -31,9 +42,16 @@ namespace Vulkano {
 		std::cout << fragCode.size() << std::endl;
 	}
 
-
-	VulkanoPipeline::VulkanoPipeline(const std::string& vertPath, const std::string& fragPath)
+	void VulkanoPipeline::createShaderModule(std::vector<char>& code, VkShaderModule* shaderModule)
 	{
-		createGraphicsPipeline(vertPath, fragPath);
+		VkShaderModuleCreateInfo createInfo{};
+		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+		createInfo.codeSize = code.size();
+		createInfo.pCode = reinterpret_cast<uint32_t*>(code.data()); //vulkan expects uint32 pointer so have to recast
+
+		if (vkCreateShaderModule(vulkanoDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) {
+			throw std::runtime_error("failed to create shader module");
+		}
 	}
+
 }
