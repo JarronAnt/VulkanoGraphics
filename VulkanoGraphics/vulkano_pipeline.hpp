@@ -7,13 +7,24 @@ namespace Vulkano {
 
 	struct PipelineConfigInfo
 	{
-
+		VkViewport viewport;
+		VkRect2D scissor;
+		VkPipelineViewportStateCreateInfo viewportInfo;
+		VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
+		VkPipelineRasterizationStateCreateInfo rasterizationInfo;
+		VkPipelineMultisampleStateCreateInfo multisampleInfo;
+		VkPipelineColorBlendAttachmentState colorBlendAttachment;
+		VkPipelineColorBlendStateCreateInfo colorBlendInfo;
+		VkPipelineDepthStencilStateCreateInfo depthStencilInfo;
+		VkPipelineLayout pipelineLayout = nullptr;
+		VkRenderPass renderPass = nullptr;
+		uint32_t subpass = 0;
 	};
 
 	class VulkanoPipeline {
 	public:
-		VulkanoPipeline(VulkanoDevice &device, const std::string& vertPath, const std::string& fragPath, const PipelineConfigInfo &info);
-		~VulkanoPipeline(){};
+		VulkanoPipeline(VulkanoDevice &device, const std::string& vertPath, const std::string& fragPath, const PipelineConfigInfo &configInfo);
+		~VulkanoPipeline();
 
 		VulkanoPipeline(const VulkanoPipeline&) = delete;
 		VulkanoPipeline& operator=(const VulkanoPipeline&) = delete;
