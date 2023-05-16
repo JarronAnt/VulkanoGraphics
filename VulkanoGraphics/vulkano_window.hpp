@@ -26,6 +26,7 @@ namespace Vulkano {
 		VulkanoWindow(const VulkanoWindow &) = delete;
 		VulkanoWindow &operator=(const VulkanoWindow&) = delete;
 
+		VkExtent2D getExtent() { return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) }; }
 		void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
 	};
 }

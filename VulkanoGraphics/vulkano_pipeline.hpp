@@ -7,6 +7,9 @@ namespace Vulkano {
 
 	struct PipelineConfigInfo
 	{
+		PipelineConfigInfo(const PipelineConfigInfo&) = delete;
+		PipelineConfigInfo() = default;
+		PipelineConfigInfo& operator=(const PipelineConfigInfo&) = delete;
 		VkViewport viewport;
 		VkRect2D scissor;
 		VkPipelineViewportStateCreateInfo viewportInfo;
@@ -29,7 +32,10 @@ namespace Vulkano {
 		VulkanoPipeline(const VulkanoPipeline&) = delete;
 		VulkanoPipeline& operator=(const VulkanoPipeline&) = delete;
 
-		static PipelineConfigInfo generateDefaultConfig(uint32_t width, uint32_t height);
+		//static PipelineConfigInfo generateDefaultConfig(uint32_t width, uint32_t height);
+		static void generateDefaultConfig(PipelineConfigInfo& configInfo, uint32_t width, uint32_t height);
+
+		void bind(VkCommandBuffer commandBuffer);
 
 	private:
 		static std::vector<char> readFile(const std::string& filePath);

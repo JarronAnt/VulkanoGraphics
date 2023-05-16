@@ -15,9 +15,9 @@ namespace Vulkano {
 		vkDestroyPipeline(vulkanoDevice.device(), graphicsPipeline, nullptr);
 	};
 
-	PipelineConfigInfo VulkanoPipeline::generateDefaultConfig(uint32_t width, uint32_t height)
+	void VulkanoPipeline::generateDefaultConfig(PipelineConfigInfo& configInfo,uint32_t width, uint32_t height)
 	{
-		PipelineConfigInfo configInfo{};
+		
 
 		configInfo.inputAssemblyInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
 		configInfo.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
@@ -33,11 +33,7 @@ namespace Vulkano {
 		configInfo.scissor.offset = { 0, 0 };
 		configInfo.scissor.extent = { width, height };
 
-		configInfo.viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-		configInfo.viewportInfo.viewportCount = 1;
-		configInfo.viewportInfo.pViewports = &configInfo.viewport;
-		configInfo.viewportInfo.scissorCount = 1;
-		configInfo.viewportInfo.pScissors = &configInfo.scissor;
+
 
 		configInfo.rasterizationInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 		configInfo.rasterizationInfo.depthClampEnable = VK_FALSE;
@@ -90,7 +86,7 @@ namespace Vulkano {
 		configInfo.depthStencilInfo.stencilTestEnable = VK_FALSE;
 		configInfo.depthStencilInfo.front = {};  // Optional
 		configInfo.depthStencilInfo.back = {};   // Optional
-		return configInfo;
+
 	}
 
 	std::vector<char> VulkanoPipeline::readFile(const std::string& filePath) {
@@ -109,6 +105,9 @@ namespace Vulkano {
 		file.close();
 
 		return buffer;
+	}
+	void VulkanoPipeline::bind(VkCommandBuffer commandBuffer) {
+		vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
 	}
 
 	void VulkanoPipeline::createGraphicsPipeline(const std::string& vertPath, const std::string& fragPath, const PipelineConfigInfo& configInfo)
@@ -143,6 +142,9 @@ namespace Vulkano {
 		vertexInputInfo.vertexBindingDescriptionCount = 0;
 		vertexInputInfo.pVertexAttributeDescriptions = nullptr;
 		vertexInputInfo.pVertexBindingDescriptions = nullptr;
+
+
+		
 
 		VkGraphicsPipelineCreateInfo graphicsCreateInfo{};
 		graphicsCreateInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
